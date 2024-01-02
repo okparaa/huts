@@ -1,0 +1,69 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.box {
+  border-radius: 17% 83% 69% 31% / 65% 79% 21% 35%;
+}
+.boxer {
+  border-radius: 17% 63% 69% 31% / 65% 79% 71% 35%;
+}
+.logo {
+  border-radius: 27% 47% 21% 61% / 22% 45% 37% 73%;
+}
+.menu a {
+  @apply rounded-full border text-blue-200 border-blue-200 px-4 py-2 hover:bg-blue-200 ml-8  hover:text-black;
+}
+.xmenu a {
+  @apply rounded-full border-2 text-black border-blue-200 px-4 py-2 hover:bg-blue-200 ml-8;
+}
+.tilt-in-left {
+  -webkit-animation: tilt-in-left 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  animation: tilt-in-left 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+@-webkit-keyframes tilt-in-left {
+  0% {
+    -webkit-transform: rotateX(-30deg) translateX(-300px) skewX(-30deg);
+    transform: rotateX(-30deg) translateX(-300px) skewX(-30deg);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: rotateX(0deg) translateX(0) skewX(0deg);
+    transform: rotateX(0deg) translateX(0) skewX(0deg);
+    opacity: 1;
+  }
+}
+@keyframes tilt-in-left {
+  0% {
+    -webkit-transform: rotateX(-30deg) translateX(-300px) skewX(-30deg);
+    transform: rotateX(-30deg) translateX(-300px) skewX(-30deg);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: rotateX(0deg) translateX(0) skewX(0deg);
+    transform: rotateX(0deg) translateX(0) skewX(0deg);
+    opacity: 1;
+  }
+}
+
+.form .error {
+  @apply text-red-800 text-[16px];
+}
+.form button {
+  @apply border rounded-full py-1 px-6 text-xl mt-6 outline-1 hover:text-black hover:bg-blue-300;
+}
+.link {
+  @apply no-underline border text-lg rounded-2xl px-3 outline-1 hover:text-black hover:bg-blue-300;
+}
+
+.form input.primary {
+  @apply block pt-2 pb-1 px-3 text-[18px] text-gray-900 bg-transparent border border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none rounded-md;
+}
+
+.form label.primary {
+  @apply absolute text-[16px] text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-900 px-2 cursor-text rounded-2xl;
+}
+.main {
+  @apply flex divide-x-2 rounded relative shadow-md ml-2 mr-2 bg-white;
+}

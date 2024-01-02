@@ -1,0 +1,83 @@
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
+}
+
+model Session {
+    id           String   @id @default(cuid())
+    valid        Boolean  @default(true)
+    refreshToken String   @unique
+    accessToken  String   @unique
+    kode         String   @db.VarChar(20)
+    createdAt    DateTime @default(now())
+    updatedAt    DateTime @updatedAt
+    user         User     @relation(fields: [userId], references: [id])
+    userId       String
+}
+
+model User {
+    id             String    @id @default(cuid())
+    name           String?
+    surname        String    @db.VarChar(60)
+    firstname      String    @db.VarChar(60)
+    lastname       String    @db.VarChar(60)
+    phone          String    @unique @db.VarChar(100)
+    username       String    @unique
+    photoUrl       String?   @db.VarChar(255)
+    createdAt      DateTime  @default(now())
+    updatedAt      DateTime  @updatedAt
+    active         Boolean?  @default(false)
+    address        String    @db.VarChar(255)
+    hashedPassword String
+    dept           Dept?     @relation(fields: [deptId], references: [id])
+    deptId         String?   @db.VarChar(255)
+    verified       DateTime?
+    image          String?
+    sessions       Session[]
+    roles          String    @default("GUEST")
+    Sales          Sales[]
+}
+
+model Sales {
+    id            String   @id @default(cuid())
+    itemName      String   @db.VarChar(80)
+    salePrice     Float
+    userId        String   @db.VarChar(60)
+    user          User     @relation(fields: [userId], references: [id])
+    customerEmail String   @db.VarChar(80)
+    customerPhone String   @db.VarChar(30)
+    createdAt     DateTime @default(now())
+    updatedAt     DateTime @updatedAt
+    quantity      Float
+}
+
+model Inventory {
+    id            String   @id @default(cuid())
+    itemName      String   @db.VarChar(80)
+    dept          Dept     @relation(fields: [deptId], references: [id])
+    deptId        String   @db.VarChar(60)
+    purchasePrice Float
+    createdAt     DateTime @default(now())
+    updatedAt     DateTime @updatedAt
+    quantity      Float
+}
+
+model Dept {
+    id        String      @id @default(cuid())
+    name      String      @db.VarChar(255)
+    createdAt DateTime    @default(now())
+    updatedAt DateTime    @updatedAt
+    user      User[]
+    Inventory Inventory[]
+}
+
+model Roles {
+    id        String   @id @default(cuid())
+    name      String   @db.VarChar(20)
+    createAt  DateTime @default(now())
+    updatedAt DateTime @updatedAt
+}
